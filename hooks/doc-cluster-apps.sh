@@ -1,3 +1,5 @@
+#!/bin/bash
+
 generate_cluster_app_doc() {
     echo "$content" > $1
 }
