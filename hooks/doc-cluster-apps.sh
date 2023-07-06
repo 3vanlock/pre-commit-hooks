@@ -8,15 +8,15 @@ files=$(find . -name cluster-app.yaml)
 
 for file in $files; do
     dir="${file%/*}/"
-    name=$(yq -r '.application.name' "$file")
-    version=$(yq -r '.application.version' "$file")
-    helm=$(yq -r '.application.helm.tempalted' "$file")
+    name=$(yq eval -r '.application.name' "$file")
+    version=$(yq eval -r '.application.version' "$file")
+    helm=$(yq eval -r '.application.helm.tempalted' "$file")
     if [ "$helm" = "true" ]; then
-        helm_template_version=$(yq -r '.application.helm.version' "$file")
+        helm_template_version=$(yq eval -r '.application.helm.version' "$file")
     fi
-    incident_priority=$(yq -r '.application.incident.priority' "$file")
-    incident_description=$(yq -r '.application.incident.description' "$file")
-    incident_affected=$(yq -r '.application.incident.affected_users' "$file")
+    incident_priority=$(yq eval -r '.application.incident.priority' "$file")
+    incident_description=$(yq eval -r '.application.incident.description' "$file")
+    incident_affected=$(yq eval -r '.application.incident.affected_users' "$file")
 
     content=$(cat <<EOT
 # $name
