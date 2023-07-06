@@ -29,17 +29,21 @@ EOT
 )
 
     if [ ! -f "$dir/CLUSTER-APP.md" ]; then
-        echo "No CLUSTER-APP.md file found. Generating..."
+        echo "No CLUSTER-APP.md file found at $dir. Generating..."
         generate_cluster_app_doc "$dir/CLUSTER-APP.md"
-        exit 1
+        err=1
     fi
 
     if [ "x$content" != "x$(cat $dir/CLUSTER-APP.md)" ]; then
-        echo "Cluster app documentation does not match. Updating..."
+        echo "Cluster app documentation at $dir does not match. Updating..."
         generate_cluster_app_doc "$dir/CLUSTER-APP.md"
-        exit 1
+        err=1
     fi
 done
+
+if [ "$err" == 1 ]; then
+    exit 1
+fi
 
 echo "Cluster app docs are up to date"
 exit 0
