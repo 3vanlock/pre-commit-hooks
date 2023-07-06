@@ -1,0 +1,6 @@
+- id: doc-cluster-apps
+  name: Generate cluster app docs
+  description: This hook generates a markdown-formatted documentation file for cluster applications installed in managed Kubernetes clusters.
+  entry: hooks/doc-cluster-apps.sh
+  language: script
+  always_run: true
