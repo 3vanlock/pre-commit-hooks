@@ -32,15 +32,15 @@ EOT
     fi
 done
 
-if [ ! -f "./POLICIES.md" ]; then
+if [ ! -f "./cluster-apps/kyverno/POLICIES.md" ]; then
     echo "No POLICIES.md file found. Generating..."
-    echo "$content" > POLICIES.md
+    echo "$content" > ./cluster-apps/kyverno/POLICIES.md
     exit 1
 fi
 
-if [ "x$content" != "x$(cat ./POLICIES.md)" ]; then
+if [ "x$content" != "x$(cat ./cluster-apps/kyverno/POLICIES.md)" ]; then
     echo "Policy documentation does not match. Updating..."
-    echo "$content" > POLICIES.md
+    echo "$content" > ./cluster-apps/kyverno/POLICIES.md
     exit 1
 fi
 
