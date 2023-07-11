@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ ! -d "./cluster-apps/kyverno/policies/" ]; then
+    echo "No Kyverno policies in standard directory."
+    exit 0
+fi
+
 content=$(cat <<EOT
 # Policies
 
