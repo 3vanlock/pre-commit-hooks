@@ -4,20 +4,20 @@ content=$(cat <<EOT
 # Policies
 
 
-| Name | Subject | Description | Severity | Action | Background |
-| ---- | ------- | ----------- | -------- | ------ | ---------- |
+| Name | Category | Subject | Description | Severity | Action | Background |
+| ---- | -------- | ------- | ----------- | -------- | ------ | ---------- |
 EOT
 )
 
-files=$(find . -regextype egrep -regex '.*ya?ml$')
+files=$(find ./cluster-apps/kyverno/policies/ -regextype egrep -regex '.*ya?ml$')
 
 for file in $files; do
     kind=$(yq eval '.kind' $file)
     if [[ "$kind" =~ ^(Policy|ClusterPolicy)$ ]]; then
         dir="${file%/*}/"
-        echo $file
 
         name=$(yq eval '.metadata.name' $file)
+        category=$(yq eval '.metadata.annotations."policies.kyverno.io/subject"' $file)
         subject=$(yq eval '.metadata.annotations."policies.kyverno.io/subject"' $file)
         description=$(yq eval '.metadata.annotations."policies.kyverno.io/description"' $file)
         severity=$(yq eval '.metadata.annotations."policies.kyverno.io/severity"' $file)
@@ -26,7 +26,7 @@ for file in $files; do
 
         content=$(cat <<EOT
 $content
-|$name|$subject|$description|$severity|$action|$background|"
+|$name|$category|$subject|$description|$severity|$action|$background|"
 EOT
 )
     fi
