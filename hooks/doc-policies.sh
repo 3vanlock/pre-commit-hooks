@@ -9,7 +9,7 @@ content=$(cat <<EOT
 EOT
 )
 
-files=$(find ./cluster-apps/kyverno/policies/ -regextype egrep -regex '.*ya?ml$')
+files=$(find ./cluster-apps/kyverno/policies/ -regextype egrep -regex '.*ya?ml$' | sort)
 
 for file in $files; do
     kind=$(yq eval '.kind' $file)
