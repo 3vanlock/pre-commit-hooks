@@ -17,7 +17,7 @@ for file in $files; do
         dir="${file%/*}/"
 
         name=$(yq eval '.metadata.name' $file)
-        category=$(yq eval '.metadata.annotations."policies.kyverno.io/subject"' $file)
+        category=$(yq eval '.metadata.annotations."policies.kyverno.io/category"' $file)
         subject=$(yq eval '.metadata.annotations."policies.kyverno.io/subject"' $file)
         description=$(yq eval '.metadata.annotations."policies.kyverno.io/description"' $file)
         severity=$(yq eval '.metadata.annotations."policies.kyverno.io/severity"' $file)
