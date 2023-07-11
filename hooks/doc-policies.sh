@@ -42,13 +42,13 @@ done
 if [ ! -f "./POLICIES.md" ]; then
     echo "No POLICIES.md file found. Generating..."
     echo "$content" > POLICIES.md
-    exit 0
+    exit 1
 fi
 
 if [ "x$content" != "x$(cat ./POLICIES.md)" ]; then
     echo "Policy documentation does not match. Updating..."
     echo "$content" > POLICIES.md
-    exit 0
+    exit 1
 fi
 
 echo "Policy docs are up to date"
