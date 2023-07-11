@@ -41,16 +41,16 @@ EOT
 done
 
 # If POLICIES document doesn't exist, create it
-if [ ! -f "./cluster-apps/kyverno/POLICIES.md" ]; then
-    echo "No POLICIES.md file found. Generating..."
-    echo "$content" > ./cluster-apps/kyverno/POLICIES.md
+if [ ! -f "./cluster-apps/kyverno/policies/README.md" ]; then
+    echo "No policy README.md file found. Generating..."
+    echo "$content" > ./cluster-apps/kyverno/policies/README.md
     exit 1
 fi
 
 # If POLICIES content is not up to date, generate it
-if [ "x$content" != "x$(cat ./cluster-apps/kyverno/POLICIES.md)" ]; then
+if [ "x$content" != "x$(cat ./cluster-apps/kyverno/policies/README.md)" ]; then
     echo "Policy documentation does not match. Updating..."
-    echo "$content" > ./cluster-apps/kyverno/POLICIES.md
+    echo "$content" > ./cluster-apps/kyverno/policies/README.md
     exit 1
 fi
 
