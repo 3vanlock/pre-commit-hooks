@@ -4,3 +4,9 @@
   entry: hooks/doc-cluster-apps.sh
   language: script
   always_run: true
+- id: doc-policies
+  name: Generate policy docs
+  description: This hook generates markdown-formatted documentation for Kubernetes policies
+  entry: hooks/doc-policies.sh
+  language: script
+  always_run: true
