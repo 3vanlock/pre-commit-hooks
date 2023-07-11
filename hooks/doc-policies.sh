@@ -9,33 +9,26 @@ content=$(cat <<EOT
 EOT
 )
 
-generate_policy_doc() {
-    echo "$content" > $1
-}
-
-files=$(git diff --cached --name-only --diff-filter=ACM)
+files=$(find . -regextype egrep -regex '.*ya?ml$')
 
 for file in $files; do
-    extension="${file##*.}"
-    if [[ "$extension" =~ ^(yaml|yml)$ ]]; then
-        kind=$(yq eval '.kind' $file)
-        if [[ "$kind" =~ ^(Policy|ClusterPolicy)$ ]]; then
-            dir="${file%/*}/"
-            echo $file
+    kind=$(yq eval '.kind' $file)
+    if [[ "$kind" =~ ^(Policy|ClusterPolicy)$ ]]; then
+        dir="${file%/*}/"
+        echo $file
 
-            name=$(yq eval '.metadata.name' $file)
-            subject=$(yq eval '.metadata.annotations."policies.kyverno.io/subject"' $file)
-            description=$(yq eval '.metadata.annotations."policies.kyverno.io/description"' $file)
-            severity=$(yq eval '.metadata.annotations."policies.kyverno.io/severity"' $file)
-            action=$(yq eval '.spec.validationFailureAction' $file)
-            background=$(yq eval '.spec.background' $file)
+        name=$(yq eval '.metadata.name' $file)
+        subject=$(yq eval '.metadata.annotations."policies.kyverno.io/subject"' $file)
+        description=$(yq eval '.metadata.annotations."policies.kyverno.io/description"' $file)
+        severity=$(yq eval '.metadata.annotations."policies.kyverno.io/severity"' $file)
+        action=$(yq eval '.spec.validationFailureAction' $file)
+        background=$(yq eval '.spec.background' $file)
 
-            content=$(cat <<EOT
+        content=$(cat <<EOT
 $content
 |$name|$subject|$description|$severity|$action|$background|"
 EOT
 )
-        fi
     fi
 done
 
