@@ -34,7 +34,7 @@ for file in $files; do
         # Append Policy attributes to documentation table
         content=$(cat <<EOT
 $content
-|$name|$category|$subject|$description|$severity|$action|$background|"
+|$name|$category|$subject|$description|$severity|$action|$background|
 EOT
 )
     fi
