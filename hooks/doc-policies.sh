@@ -7,7 +7,7 @@ if [ ! -d "./cluster-apps/kyverno/policies/" ]; then
 fi
 
 # Accumulate file list and sort for standard table order
-files=$(find ./cluster-apps/kyverno/policies/ -regextype egrep -regex '.*ya?ml$' | sort)
+files=$(find ./cluster-apps/kyverno/policies/ | grep -e '.*ya\?ml$' | sort)
 
 # Policy documentation header
 content=$(cat <<EOT
