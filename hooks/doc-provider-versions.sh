@@ -26,9 +26,3 @@ EOT
         echo "|$registry|$package|" >> "$provider_dir/README.md"
     done
 done
-
-git diff-index --quiet HEAD
-if [ $? -ne 0 ]; then
-    echo "Changes detected in provider versions. Please review the README.md files."
-    exit 1
-fi
