@@ -14,4 +14,5 @@
   name: Document Crossplane provider versions
   description: This hook generates markdown-formatted documentation for Crossplane provider versions
   entry: hooks/doc-provider-versions.sh
+  language: script
   always_run: true
