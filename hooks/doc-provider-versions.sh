@@ -6,9 +6,7 @@ do
     echo "# Crossplane Providers" > "$provider_dir/README.md"
     header=$(cat <<EOT
 ## Upbound Providers
-
-
-| Provider Name | Version | 
+| Provider Name | Version |
 | ---- | -------- | 
 EOT
 )
