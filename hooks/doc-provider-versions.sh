@@ -1,7 +1,7 @@
 #!/bin/bash
 find ./clusters -type d -name crossplane-resources -print0 | while read -d $'\0' file
 do
-    provider_dir="$dir/providers"
+    provider_dir="$file/providers"
     content=""
     echo "# Crossplane Providers" > "$provider_dir/README.md"
     header=$(cat <<EOT
