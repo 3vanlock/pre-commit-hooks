@@ -5,7 +5,7 @@ do
     content=""
     echo "# Crossplane Providers" > "$provider_dir/README.md"
     echo "## Upbound Providers" >> "$provider_dir/README.md"
-    echo "| Provider Name | Version |" >> "$provider_dir/README.md"
+    echo "| Registry | Name and Version |" >> "$provider_dir/README.md"
     echo "| ---- | -------- |" >> "$provider_dir/README.md"
     find $provider_dir -type f -name "*.yaml" -not -name "kustomization.yaml"  -print0 | while read -d $'\0' file
     do
@@ -19,4 +19,5 @@ do
         package=$(echo ${result:24})
         echo "|$registry|$package|" >> "$provider_dir/README.md"
     done
+    cat "$provider_dir/README.md"
 done
