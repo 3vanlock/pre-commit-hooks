@@ -9,7 +9,7 @@ do
     echo "| -------- | ---- | ------- |" >> "$provider_dir/README.md"
     find $provider_dir -type f -name "*.yaml" -not -name "kustomization.yaml"  -print0 | sort -z | while read -d $'\0' file
     do
-        result=$(grep -E "xpkg.upbound.io/upbound/(.*)" $file)
+        result=$(grep -E "xpkg.upbound.io/(.*)" $file)
         if [ -z "$result" ]; then
             continue
         fi
